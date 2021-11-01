@@ -3,12 +3,14 @@ import Menu from './Menu';
 import Categories from './Categories';
 import menu from './data';
 
+// get all the unique caterogies -> https://www.youtube.com/watch?v=yxT1lgupUrY
+const allCaterories = ['all', ...new Set (menu.map(item => item.category))]
+
 function App() {
   const [menuItems, setMenuItems] = useState(menu)
-  const [menuCategories, setMenuCategories] = useState([])
+  const [menuCategories, setMenuCategories] = useState(allCaterories)
 
-
-  const filterHandle = (category) => {
+  const filterHandler = (category) => {
     if(category == "all" ){
       return setMenuItems(menu)
     }
@@ -25,7 +27,7 @@ function App() {
           <div className="underline"></div>
         </div>
       </section>
-      <Categories onFilter={filterHandle}/>
+      <Categories onFilter={filterHandler} categories={menuCategories}/>
       <Menu items={menuItems}/>
     </main>
   );
